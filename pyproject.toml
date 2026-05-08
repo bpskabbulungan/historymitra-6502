@@ -1,0 +1,23 @@
+[project]
+name = "historymitra-6502"
+version = "0.1.0"
+description = "Fetcher dan exporter histori survei mitra BPS Bulungan"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openpyxl>=3.1.5",
+  "requests>=2.32.0",
+]
+
+[project.scripts]
+historymitra = "historymitra.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

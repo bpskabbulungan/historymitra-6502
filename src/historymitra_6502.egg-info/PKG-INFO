@@ -1,0 +1,83 @@
+Metadata-Version: 2.4
+Name: historymitra-6502
+Version: 0.1.0
+Summary: Fetcher dan exporter histori survei mitra BPS Bulungan
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: openpyxl>=3.1.5
+Requires-Dist: requests>=2.32.0
+
+# History Mitra BPS Bulungan
+
+CLI Python untuk:
+
+- mengambil daftar mitra BPS Bulungan
+- mengambil histori survei yang pernah diikuti tiap mitra
+- menampilkan ringkasan rapi di terminal
+- mengekspor workbook Excel yang detail dan mudah dibaca
+
+## Pilihan mode
+
+- `sample`: memakai file dump seperti `tabel-mitra.txt`, `id-mitra.txt`, dan `history-mitra.txt`
+- `live`: memanggil API langsung memakai header atau cookie dari sesi yang sah
+
+## Instalasi
+
+```bash
+pip install -e .
+```
+
+Atau:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Menjalankan mode sample
+
+```bash
+python -m historymitra run ^
+  --source sample ^
+  --table-file "C:\Users\ASUS\Downloads\tabel-mitra.txt" ^
+  --detail-file "C:\Users\ASUS\Downloads\id-mitra.txt" ^
+  --history-file "C:\Users\ASUS\Downloads\history-mitra.txt"
+```
+
+## Menjalankan mode live
+
+Siapkan salah satu atau beberapa variabel berikut:
+
+- `MITRA_API_COOKIE`
+- `MITRA_API_AUTHORIZATION`
+- `MITRA_API_HEADERS_JSON`
+- `MITRA_API_USER_AGENT`
+- `MITRA_API_REFERER`
+
+Contoh:
+
+```powershell
+$env:MITRA_API_COOKIE = "cookie_dari_browser"
+python -m historymitra run --source live --year 2026 --prov 65 --kab 02
+```
+
+## Output
+
+Secara default hasil disimpan ke folder `output/`:
+
+- `output/mitra_history_report.xlsx`
+- `output/raw/mitra_list.json`
+- `output/raw/mitra_histories.json`
+
+Sheet Excel yang dibuat:
+
+- `Ringkasan`
+- `Mitra`
+- `History`
+- `Rekap Mitra`
+- `Rekap Survey`
+
+## Catatan penting
+
+- Endpoint live saat diuji dari mesin ini mengembalikan `401 Unauthorized` tanpa autentikasi.
+- Karena itu mode `sample` disediakan agar alur normalisasi dan ekspor tetap bisa diuji dari dump file.
+- Data sensitif seperti rekening, NPWP, foto, dan dokumen pendukung sengaja tidak dijadikan fokus output utama.

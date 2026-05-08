@@ -1,0 +1,2 @@
+[console_scripts]
+historymitra = historymitra.cli:main
