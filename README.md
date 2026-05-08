@@ -1,4 +1,4 @@
-# History Mitra BPS Bulungan
+# History Mitra 
 
 ## Ringkasan
 
